@@ -1,77 +1,34 @@
-# Álbum Player Interativo - Zezé Di Camargo & Luciano 2 Horas de Sucesso 2009 Ao Vivo
+# Duas Horas de Sucesso — Ao Vivo · Zezé Di Camargo & Luciano
 
-Este projeto é um player/encarte digital premium, desenvolvido com foco na experiência mobile (Safari/iOS) e na reprodução de áudio estática (GitHub Pages).
+Player estático (HTML/CSS/JS puro) para GitHub Pages. Tudo é dirigido por `data/album.js`.
 
-## Estrutura do Projeto
+## O que muda de um disco para o outro
+Quando a faixa cruza a fronteira (faixa 12 → 13, ou volta), trocam juntos, com transição suave:
+capa, faixa de palco, luz de fundo e **toda a paleta** (âmbar no Disco 1, azul no Disco 2).
+O dourado do título (#D1B161) é o mesmo nos dois, como nas capas.
 
-```
-album-player/
-│
-├── index.html       # Estrutura principal da página
-│
-├── css/
-│   └── style.css    # Estilos (mobile-first, variáveis CSS, estética premium)
-│
-├── js/
-│   ├── app.js       # Ponto de entrada e inicialização
-│   ├── player.js    # Lógica de controle de áudio (HTML5 Audio API)
-│   └── ui.js        # Lógica de interface (DOM, modais, renderização)
-│
-├── data/
-│   └── album.js     # ARQUIVO PRINCIPAL DE DADOS (todas as informações ficam aqui)
-│
-├── assets/
-│   └── cover.jpg    # Capa do álbum (imagem principal e ambiental)
-│
-├── audio/
-│   └── (seus arquivos .mp3 aqui)
-│
-└── README.md
-```
+## Paletas medidas (assets/cover1.jpg e cover2.jpg, script em tools/medir_paletas.py)
+| Papel | Disco 1 | Disco 2 |
+|---|---|---|
+| blackMain (palco) | #090B0A | #090B0A |
+| blackBrown | #211211 | #10121A |
+| brownDark | #56241B | #242B44 |
+| sepiaDark | #913F2A | #494D6D |
+| sepiaMedium | #CF8C59 | #A89AA4 |
+| goldMain (título) | #D1B161 | #D1B161 |
+| cream (relógio) | #F4D6B5 | #D1CDDB |
+| light (relógio em luz) | #F9E8DF | #E9E4EA |
 
-## Como Editar os Dados
+## Recursos
+- Anel de marcações em volta do relógio da capa = progresso da faixa (arraste para buscar; toque no mostrador para tocar/pausar).
+- Seletor Disco 1 / Disco 2, cabeçalhos de disco na lista, equalizador na faixa tocando.
+- Letras sincronizadas (LRC), botão esconder/mostrar, tela cheia (Esc sai), botão PT de tradução (campo opcional `translation` por faixa, LRC ou texto).
+- Tela bloqueada / central de mídia (Media Session) com capa, faixa anterior/próxima e posição.
+- Atalhos: Espaço = tocar/pausar; Shift+← / Shift+→ = faixa anterior/próxima.
 
-A aplicação é **totalmente orientada a dados**. Nunca edite o arquivo HTML para adicionar músicas, letras ou premiações.
-Tudo deve ser alterado no arquivo `data/album.js`.
+## Dados
+- `discs[]`: `trackStart`/`trackEnd`, `cover`, `strip`, `palette`, `clock` (posição/raio do relógio na capa, em px de 640×576).
+- `tracks[]`: `number, title, duration, composers[], audio, lyrics, translation?`.
+- Coloque os áudios em `audio/01.flac … 23.flac`.
 
-### 1. Capa do Álbum
-Substitua o arquivo `assets/cover.jpg` pela capa oficial em alta resolução. O sistema automaticamente criará o fundo ambiental embaçado usando duas capas.
-
-### 2. Informações Gerais
-Abra `data/album.js` e edite os campos do objeto principal (`title`, `releaseDate`, `description`, etc).
-
-### 3. Ficha Técnica e Premiações
-- A ficha técnica está na propriedade `technicalCredits`.
-- As premiações ficam no array `awards`. Deixe o array vazio `[]` se não houver dados, o sistema tratará a interface automaticamente.
-
-### 4. Músicas (23 faixas)
-Dentro de `data/album.js`, existe o array `tracks` com 23 objetos.
-Para adicionar uma música:
-```javascript
-{
-    number: 1,
-    title: "Nome da Música",
-    duration: "03:45",
-    composers: ["Compositor 1", "Compositor 2"],
-    audio: "audio/01-faixa.mp3",
-    lyrics: "Letra da música aqui..."
-}
-```
-
-**ARQUIVOS DE ÁUDIO:** 
-Coloque os arquivos `.flac` dentro da pasta `audio/` na raiz do projeto e referencie o caminho relativo no campo `audio` de cada faixa (ex: `audio/01.flac`). Recomenda-se nomear os arquivos com o número da faixa para manter a organização (01-, 02-, etc). Como o GitHub Pages tem limite de tamanho por repositório (recomendado até ~1GB), fique atento ao tamanho total dos MP3s se o álbum for grande.
-
-### 5. Letras Sincronizadas (formato LRC)
-O campo `lyrics` aceita dois formatos:
-
-- **Texto simples**, exibido estático (comportamento original).
-- **Formato LRC**, com tags de tempo `[mm:ss.xx]` no início de cada linha. Quando o sistema detecta esse padrão, a letra é exibida linha por linha e a linha atual é destacada automaticamente conforme a música toca (efeito karaokê), com rolagem automática.
-
-Exemplo de `lyrics` no formato LRC:
-```javascript
-lyrics: `[00:12.00]Primeira linha da música
-[00:16.50]Segunda linha da música
-[00:21.30]Terceira linha da música`
-```
-
-Você pode conseguir arquivos `.lrc` prontos em sites de letras sincronizadas, ou criar/editar manualmente. Basta colar o conteúdo do `.lrc` (mantendo as tags de tempo) direto no campo `lyrics` como uma string. Não é necessário fazer upload do arquivo `.lrc` em si — o conteúdo dele vira texto dentro do `album.js`.
+Fontes: Marcellus e Jost (OFL), licenças em `assets/fonts/`.

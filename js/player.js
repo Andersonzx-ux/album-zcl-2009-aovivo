@@ -16,13 +16,13 @@ class Player {
 
     loadPreferences() {
         try {
-            const vol = localStorage.getItem('player_volume');
+            const vol = localStorage.getItem('zcl2009_volume');
             if (vol !== null) this.audio.volume = parseFloat(vol);
             
-            const shuffle = localStorage.getItem('player_shuffle');
+            const shuffle = localStorage.getItem('zcl2009_shuffle');
             if (shuffle !== null) this.isShuffle = shuffle === 'true';
 
-            const repeat = localStorage.getItem('player_repeat');
+            const repeat = localStorage.getItem('zcl2009_repeat');
             if (repeat !== null) this.repeatMode = parseInt(repeat, 10);
         } catch (e) {
             console.warn("localStorage not available");
@@ -31,9 +31,9 @@ class Player {
 
     savePreferences() {
         try {
-            localStorage.setItem('player_volume', this.audio.volume);
-            localStorage.setItem('player_shuffle', this.isShuffle);
-            localStorage.setItem('player_repeat', this.repeatMode);
+            localStorage.setItem('zcl2009_volume', this.audio.volume);
+            localStorage.setItem('zcl2009_shuffle', this.isShuffle);
+            localStorage.setItem('zcl2009_repeat', this.repeatMode);
         } catch (e) {
             // ignore
         }

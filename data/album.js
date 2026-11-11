@@ -1,5 +1,5 @@
 window.album = {
-    title: "2 Horas de Sucesso - Ao Vivo",
+    title: "Duas Horas de Sucesso — Ao Vivo",
     artist: "Zezé Di Camargo & Luciano",
     releaseDate: "23 de julho de 2009",
     recordingDate: "28 de agosto de 2008",
@@ -9,43 +9,48 @@ window.album = {
     description: "",
     totalDuration: "02:02:21",
 
+    // Dois discos: o player troca capa, paleta, faixa de palco e luz quando a faixa cruza a fronteira.
+    // "clock": posição/raio do relógio da capa (em pixels da imagem 640x576), onde fica o anel de progresso.
+    // Paletas medidas nos arquivos assets/cover1.jpg e assets/cover2.jpg (ver tools/medir_paletas.py).
     discs: [
         {
             number: 1,
             title: "Disco 1",
+            vol: "Vol. 1",
             cover: "assets/cover1.jpg",
+            strip: "assets/strip-1.jpg",
             trackStart: 1,
             trackEnd: 12,
-
+            clock: { x: 333, y: 113, r: 103 },
             palette: {
-                blackMain: "#090B0A",   // blusa preta
-                blackBrown: "#1E1617",  // fundo, sombra (topo)
-                brownDark: "#3A1B16",   // fundo, vinho médio
-                sepiaDark: "#714119",   // fundo/poltrona, vermelho vivo
-                sepiaMedium: "#8E5B4C", // poltrona em luz
-                goldMain: "#D3B161",    // pele (acento quente)
-                cream: "#F4D7B7",       // camisa branca
-                light: "#F8E6D5"        // título / camisa em luz
+                blackMain: "#090B0A",   // palco preto
+                blackBrown: "#211211",  // sombra do palco, tom vinho
+                brownDark: "#56241B",   // faixa de luz do palco, parte baixa
+                sepiaDark: "#913F2A",   // faixa de luz do palco, vermelho
+                sepiaMedium: "#CF8C59", // faixa de luz do palco, laranja aceso
+                goldMain: "#D1B161",    // título dourado
+                cream: "#F4D6B5",       // mostrador do relógio
+                light: "#F9E8DF"        // mostrador do relógio em luz
             }
         },
         {
             number: 2,
             title: "Disco 2",
+            vol: "Vol. 2",
             cover: "assets/cover2.jpg",
+            strip: "assets/strip-2.jpg",
             trackStart: 13,
             trackEnd: 23,
-            // Paleta medida na capa marrom (verso do "Double Face"): papel de
-            // parede damasco, couro preto, camisa listrada, título dourado e
-            // chapéu bege. O código de barras e o texto legal foram ignorados.
+            clock: { x: 326, y: 119, r: 103 },
             palette: {
-                blackMain: "#090B0A",   // couro/sombras
-                blackBrown: "#17181F",  // papel de parede, fundo
-                brownDark: "#1C2237",   // papel de parede, padrão em luz
-                sepiaDark: "#303A63",   // camisa listrada marrom
-                sepiaMedium: "#444455", // tom dominante neutro-quente
-                goldMain: "#D4B261",    // título dourado
-                cream: "#D9D6E1",       // chapéu bege
-                light: "#E8E3E9"        // tons mais claros da foto
+                blackMain: "#090B0A",   // palco preto
+                blackBrown: "#10121A",  // sombra do palco, tom azulado
+                brownDark: "#242B44",   // faixa de luz do palco, parte baixa
+                sepiaDark: "#494D6D",   // faixa de luz do palco, azul-lilás
+                sepiaMedium: "#A89AA4", // faixa de luz do palco, cinza quente
+                goldMain: "#D1B161",    // título dourado
+                cream: "#D1CDDB",       // mostrador do relógio
+                light: "#E9E4EA"        // mostrador do relógio em luz
             }
         }
     ],
